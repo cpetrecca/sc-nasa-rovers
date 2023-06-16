@@ -22,6 +22,7 @@ This Repo:
 https://github.com/cpetrecca/sc-nasa-rovers
 
 Live url:
+https://sc-nasa-rovers-az2p.vercel.app/
 
 ## Author 
  
