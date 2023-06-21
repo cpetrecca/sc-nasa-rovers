@@ -6,7 +6,7 @@ const API_KEY = roversConfig.api_key;
 async function getLatestPhotos(rover: string) {
   const res = await fetch(
     `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/latest_photos?api_key=${API_KEY}`,
-    { next: { revalidate: 60 * 60 * 24 } }
+    { next: { revalidate: 60 * 24 } }
   );
   if (!res.ok) {
     throw new Error("Failed to fetch rover data.");
@@ -19,7 +19,7 @@ async function getLatestPhotos(rover: string) {
 async function getRovers() {
   const res = await fetch(
     `https://api.nasa.gov/mars-photos/api/v1/rovers/?api_key=${API_KEY}`,
-    { next: { revalidate: 60 * 60 * 24 } }
+    { next: { revalidate: 60 * 24 } }
   );
   if (!res.ok) {
     throw new Error("Failed to fetch rover data.");
@@ -34,7 +34,7 @@ async function getManifests(roverToFetch: IRover[]) {
   const fetchedRoversManifests = await Promise.all(
     roverToFetch.map((rover) => {
       const revalidationTime =
-        rover.status === "active" ? 60 * 60 * 24 : 60 * 60 * 24 * 365;
+        rover.status === "active" ? 60 * 24 : 60 * 24 * 365;
       return fetch(
         `https://api.nasa.gov/mars-photos/api/v1/manifests/${rover.name}/?api_key=${API_KEY}`,
         { next: { revalidate: revalidationTime } }
